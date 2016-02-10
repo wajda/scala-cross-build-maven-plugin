@@ -39,7 +39,7 @@ class FileRewriter {
     this.rules = rules;
   }
 
-  public void rewrite(final File file) throws IOException, XMLStreamException {
+  public void rewrite(final File file) throws IOException {
     if (!file.exists()) {
       throw new FileNotFoundException("File does not exist: " + file);
     }

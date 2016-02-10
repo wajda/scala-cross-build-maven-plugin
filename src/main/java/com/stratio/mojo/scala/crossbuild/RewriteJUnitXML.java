@@ -16,44 +16,26 @@
 package com.stratio.mojo.scala.crossbuild;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.util.List;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
-
+/**
+ * Rewrites a JUnit XML report to append Scala version string (e.g. [Scala 2.11])
+ * to the end of each test case name.
+ *
+ * This currently works with regular expressions, since XML parser implementations
+ * are not good at preserving original format, specially with some malformed
+ * (but widespread) XML.
+ */
 class RewriteJUnitXML {
 
-  private static Pattern SCALA_SUFFIX = Pattern.compile("\\[Scala [0-9]+\\.[0-9]+\\]");
-
-  public void rewrite(final File file, final String scalaBinaryVersion) throws IOException, JDOMException {
-    final SAXBuilder jdomBuilder = new SAXBuilder();
-    final Document doc = jdomBuilder.build(file);
-    for (final Element element: doc.getRootElement().getChildren()) {
-      if (!"testcase".equals(element.getName())) {
-        continue;
-      }
-      final org.jdom2.Attribute nameAttribute = element.getAttribute("name");
-      if (nameAttribute == null) {
-        continue;
-      }
-      final String oldValue = nameAttribute.getValue();
-      if (SCALA_SUFFIX.matcher(oldValue).find()) {
-        continue;
-      }
-      final String newValue = oldValue + " [Scala " + scalaBinaryVersion + "]";
-      if (newValue.equals(oldValue)) {
-        continue;
-      }
-      nameAttribute.setValue(newValue);
-    }
-    final XMLOutputter xmlOut = new XMLOutputter();
-    xmlOut.output(doc, new FileOutputStream(file));
+  public void rewrite(final File file, final String scalaBinaryVersion) throws IOException {
+    final List<RewriteRule> rewriteRules = Arrays.<RewriteRule>asList(
+        new JUnitReportRewriteRule(scalaBinaryVersion)
+    );
+    final FileRewriter rewriter = new FileRewriter(rewriteRules);
+    rewriter.rewrite(file);
   }
 
 }

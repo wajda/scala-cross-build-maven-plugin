@@ -23,7 +23,6 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.shared.utils.io.DirectoryScanner;
-import org.jdom2.JDOMException;
 
 /**
  * Transforms JUnit XML reports so that Scala binary version
@@ -51,7 +50,7 @@ public class TransformJUnitReportMojo extends AbstractCrossBuildMojo {
     for (final String file: getAllFiles(includes, excludes)) {
       try {
         rewriter.rewrite(new File(file), scalaBinaryVersion);
-      } catch (final IOException | JDOMException ex) {
+      } catch (final IOException ex) {
         throw new MojoFailureException("Error while rewriting", ex);
       }
     }

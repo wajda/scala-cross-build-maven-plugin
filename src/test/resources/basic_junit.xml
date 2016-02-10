@@ -56,6 +56,6 @@
   </properties>
   <testcase name="replacement" classname="com.stratio.mojo.scala.crossbuild.ArtifactIdRewriteRuleTest" time="0.035"/>
   <testcase name="noStartDocument" classname="com.stratio.mojo.scala.crossbuild.ArtifactIdRewriteRuleTest" time="0.001"/>
-  <testcase name="badPath" classname="com.stratio.mojo.scala.crossbuild.ArtifactIdRewriteRuleTest" time="0.002"/>
+  <testcase name="badPath [Scala 2.11]" classname="com.stratio.mojo.scala.crossbuild.ArtifactIdRewriteRuleTest" time="0.002"/>
   <testcase classname="com.stratio.mojo.scala.crossbuild.ArtifactIdRewriteRuleTest" time="0.002" name="noArtifactChange" />
 </testsuite>

@@ -28,14 +28,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.jdom2.JDOMException;
-import org.jdom2.input.JDOMParseException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 public class RewriteJUnitXMLTest {
+
+  private static final String[][] reports = new String[][]{
+      new String[] {
+          "/basic_junit.xml", "/basic_junit_result.xml"
+      },
+      new String[] {
+          "/TEST-com.stratio.common.utils.components.repository.RepositoryComponentTest.xml",
+          "/TEST-com.stratio.common.utils.components.repository.RepositoryComponentTest_result.xml",
+      },
+      new String[] {
+          "/empty_file.xml", "/empty_file.xml"
+      }
+  };
 
   @Rule
   public TemporaryFolder tempDir = new TemporaryFolder();
@@ -44,7 +55,7 @@ public class RewriteJUnitXMLTest {
   public ExpectedException thrown = ExpectedException.none();
 
   @Test
-  public void rewriteNonExistentFile() throws IOException, JDOMException {
+  public void rewriteNonExistentFile() throws IOException {
     final RewriteJUnitXML rewriter = new RewriteJUnitXML();
     final String path = "report_does_not_exist.xml";
     final String newBinaryVersion = "2.11";
@@ -53,42 +64,38 @@ public class RewriteJUnitXMLTest {
   }
 
   @Test
-  public void rewriteEmptyFile() throws IOException, JDOMException {
-    final RewriteJUnitXML rewriter = new RewriteJUnitXML();
-    tempDir.create();
-    final File file = tempDir.newFile();
-    file.delete();
-    assertThat(file.createNewFile()).isTrue();
-    final String newBinaryVersion = "2.11";
-    //TODO: thrown.expect(IOException.class); ????
-    thrown.expect(JDOMParseException.class);
-    rewriter.rewrite(file, newBinaryVersion);
+  public void rewrite() throws IOException {
+    for (final String[] reportPair: reports) {
+      final String origReport = reportPair[0];
+      final String resultReport = reportPair[1];
+      final RewriteJUnitXML rewriter = new RewriteJUnitXML();
+      tempDir.create();
+      final File file = tempDir.newFile();
+      file.delete();
+      Files.copy(getClass().getResourceAsStream(origReport), file.toPath());
+      final String newBinaryVersion = "2.11";
+      rewriter.rewrite(file, newBinaryVersion);
+      System.out.println(file);
+      assertEqualToResource(file, resultReport);
+
+      //file.delete();
+    }
   }
 
   @Test
-  public void rewriteBasicReport() throws IOException, JDOMException {
-    final RewriteJUnitXML rewriter = new RewriteJUnitXML();
-    tempDir.create();
-    final File file = tempDir.newFile();
-    file.delete();
-    Files.copy(getClass().getResourceAsStream("/basic_junit.xml"), file.toPath());
-    final String newBinaryVersion = "2.11";
-    rewriter.rewrite(file, newBinaryVersion);
-    assertEqualToResource(file, "/basic_junit_result.xml");
-    file.delete();
-  }
-
-  @Test
-  public void idempotency() throws IOException, JDOMException {
-    final RewriteJUnitXML rewriter = new RewriteJUnitXML();
-    tempDir.create();
-    final File file = tempDir.newFile();
-    file.delete();
-    Files.copy(getClass().getResourceAsStream("/basic_junit_result.xml"), file.toPath());
-    final String newBinaryVersion = "2.11";
-    rewriter.rewrite(file, newBinaryVersion);
-    assertEqualToResource(file, "/basic_junit_result.xml");
-    file.delete();
+  public void idempotency() throws IOException {
+    for (final String[] reportPair: reports) {
+      final String resultReport = reportPair[1];
+      final RewriteJUnitXML rewriter = new RewriteJUnitXML();
+      tempDir.create();
+      final File file = tempDir.newFile();
+      file.delete();
+      Files.copy(getClass().getResourceAsStream(resultReport), file.toPath());
+      final String newBinaryVersion = "2.11";
+      rewriter.rewrite(file, newBinaryVersion);
+      assertEqualToResource(file, resultReport);
+      file.delete();
+    }
   }
 
   private void assertEqualToResource(final File actual, final String expected) throws IOException {
