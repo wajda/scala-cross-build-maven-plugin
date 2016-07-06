@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.stratio</groupId>
     <artifactId>parent</artifactId>
-    <version>0.5.0</version>
+    <version>0.8.1</version>
   </parent>
   <groupId>com.stratio.mojo</groupId>
   <artifactId>scala-cross-build-maven-plugin</artifactId>
