@@ -25,18 +25,13 @@ class PropertyRewriteRule extends RegexRewriteRule {
   public PropertyRewriteRule(final String property, final String newValue) {
     super(
         Pattern.compile(String.format(
-            "(<properties>(?:.|\n)*?<%s>)"
-                + "(?:(?:[^<]|\n)*?)"
+            "(?s)(<properties>.*?<%s>)"
+                + "[^<]*?"
                 + "(</%s>)",
-            regexEscape(property), regexEscape(property)
+            Pattern.quote(property), Pattern.quote(property)
         ), Pattern.MULTILINE & Pattern.DOTALL),
         "$1" + newValue + "$2",
         limitPattern
     );
   }
-
-  private static String regexEscape(final String input) {
-    return input.replace(".", "\\.");
-  }
-
 }
