@@ -154,9 +154,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>com.stratio.mojo</groupId>
+                <groupId>com.github.wajda</groupId>
                 <artifactId>scala-cross-build-maven-plugin</artifactId>
-                <version>0.1.0-RC1</version>
+                <version>0.2.0</version>
                 <configuration>
                     <defaultScalaBinaryVersion>${default.scala.binary.version}</defaultScalaBinaryVersion>
                     <defaultScalaVersion>${default.scala.version}</defaultScalaVersion>
