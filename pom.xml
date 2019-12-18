@@ -55,6 +55,21 @@
         </developer>
     </developers>
 
+    <organization>
+        <name>Stratio</name>
+        <url>http://stratio.com</url>
+    </organization>
+
+    <inceptionYear>2015</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.maven</groupId>
