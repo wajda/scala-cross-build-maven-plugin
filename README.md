@@ -1,23 +1,20 @@
-[![Coverage Status](https://coveralls.io/repos/github/Stratio/scala-cross-build-maven-plugin/badge.svg?branch=master)](https://coveralls.io/github/Stratio/scala-cross-build-maven-plugin?branch=master)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.wajda/scala-cross-build-maven-plugin/badge.svg)](https://search.maven.org/search?q=g:com.github.wajda)
 
 scala-cross-build-maven-plugin
 ==============================
 
-Introduction
-------------
-
-scala-cross-build-maven-plugin provides goals that help maintaining Scala cross version builds
+`scala-cross-build-maven-plugin` provides goals that help maintaining Scala cross version builds
 with Maven.
 
 Set up
 ------
 
-See src/it/full-example/pom.xml for an example.
+See `src/it/full-example/pom.xml` for an example.
 
 Usage
 -----
 
-```
+```shell script
 # Change Scala version in pom.xml.
 mvn scala-cross-build:change-version -Pscala-2.11
 
@@ -26,5 +23,4 @@ mvn scala-cross-build:transform-junit-reports -Pscala-2.11
 
 # Change back to the default Scala version.
 mvn scala-cross-build:restore-version
-
 ```
