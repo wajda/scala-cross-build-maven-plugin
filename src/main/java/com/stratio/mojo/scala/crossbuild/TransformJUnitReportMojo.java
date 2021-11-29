@@ -49,7 +49,7 @@ public class TransformJUnitReportMojo extends AbstractCrossBuildMojo {
   @Override
   public void execute(final String scalaBinaryVersion, final String scalaVersion)
       throws MojoExecutionException, MojoFailureException {
-    final RewriteJUnitXML rewriter = new RewriteJUnitXML();
+    final RewriteJUnitXML rewriter = new RewriteJUnitXML(generatePomBackupFiles);
     for (final String file: getFilesToRewrite()) {
       try {
         rewriter.rewrite(new File(file), scalaBinaryVersion);

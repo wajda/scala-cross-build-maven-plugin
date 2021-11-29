@@ -54,6 +54,7 @@ public class RestoreVersionMojo extends AbstractCrossBuildMojo {
         scalaVersionProperty,
         defaultScalaBinaryVersion,
         defaultScalaVersion,
+        generatePomBackupFiles,
         getLog());
   }
 

@@ -40,14 +40,20 @@ abstract class AbstractCrossBuildMojo extends AbstractMojo {
   /**
    * Maven property to use for Scala binary version.
    */
-  @Parameter(property = "scalaBinaryVersionProperty", defaultValue = "scala.binary.version" ,required = true)
+  @Parameter(property = "scalaBinaryVersionProperty", defaultValue = "scala.binary.version" , required = true)
   protected String scalaBinaryVersionProperty;
 
   /**
    * Maven property to use for Scala version.
    */
-  @Parameter(property = "scalaVersionProperty", defaultValue = "scala.version" , required = true)
+  @Parameter(property = "scalaVersionProperty", defaultValue = "scala.version", required = true)
   protected String scalaVersionProperty;
+
+  /**
+   * Enable/disable POM backup files generation
+   */
+  @Parameter(property = "generatePomBackupFiles", defaultValue = "true", required = true)
+  protected Boolean generatePomBackupFiles;
 
   /**
    * Maven property to use for Scala binary version.

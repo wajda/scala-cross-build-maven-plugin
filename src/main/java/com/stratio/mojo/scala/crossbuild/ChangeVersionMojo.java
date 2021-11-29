@@ -44,6 +44,7 @@ public class ChangeVersionMojo extends AbstractCrossBuildMojo {
         scalaVersionProperty,
         scalaBinaryVersion,
         scalaVersion,
+        generatePomBackupFiles,
         getLog());
   }
 

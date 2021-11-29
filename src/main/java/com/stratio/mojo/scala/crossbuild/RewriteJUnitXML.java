@@ -30,11 +30,17 @@ import java.util.List;
  */
 class RewriteJUnitXML {
 
+  private final Boolean generatePomBackupFiles;
+
+  public RewriteJUnitXML(final Boolean generatePomBackupFiles) {
+    this.generatePomBackupFiles = generatePomBackupFiles;
+  }
+
   public void rewrite(final File file, final String scalaBinaryVersion) throws IOException {
     final List<RewriteRule> rewriteRules = Arrays.<RewriteRule>asList(
         new JUnitReportRewriteRule(scalaBinaryVersion)
     );
-    final FileRewriter rewriter = new FileRewriter(rewriteRules);
+    final FileRewriter rewriter = new FileRewriter(rewriteRules, generatePomBackupFiles);
     rewriter.rewrite(file);
   }
 

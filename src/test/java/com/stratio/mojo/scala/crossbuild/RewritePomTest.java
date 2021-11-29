@@ -54,7 +54,7 @@ public class RewritePomTest {
 
   @Test
   public void rewriteNonExistentFile() throws IOException, XMLStreamException {
-    final RewritePom rewritePom = new RewritePom();
+    final RewritePom rewritePom = new RewritePom(false);
     final String path = "pom_does_not_exist.xml";
     final MavenProject project = getMockMavenProject(new File(path));
     final String newBinaryVersion = "2.11";
@@ -66,7 +66,7 @@ public class RewritePomTest {
 
   @Test
   public void rewriteEmptyFile() throws IOException, XMLStreamException {
-    final RewritePom rewritePom = new RewritePom();
+    final RewritePom rewritePom = new RewritePom(false);
     tempDir.create();
     final File file = tempDir.newFile();
     file.delete();
@@ -80,7 +80,7 @@ public class RewritePomTest {
 
   @Test
   public void rewriteBaseArtifactId() throws IOException, XMLStreamException {
-    final RewritePom rewritePom = new RewritePom();
+    final RewritePom rewritePom = new RewritePom(false);
     tempDir.create();
     final File file = tempDir.newFile();
     file.delete();
@@ -100,7 +100,7 @@ public class RewritePomTest {
    */
   @Test
   public void rewriteWithoutStackOverflow_Issue32() throws IOException, XMLStreamException {
-    final RewritePom rewritePom = new RewritePom();
+    final RewritePom rewritePom = new RewritePom(false);
     tempDir.create();
     final File file = tempDir.newFile();
     file.delete();

@@ -25,6 +25,12 @@ import org.apache.maven.project.MavenProject;
 
 class RewritePom {
 
+  private final Boolean generatePomBackupFiles;
+
+  public RewritePom(final Boolean generatePomBackupFiles) {
+    this.generatePomBackupFiles = generatePomBackupFiles;
+  }
+
   public void rewrite(
       final MavenProject pom,
       final String scalaBinaryVersionProperty,
@@ -37,7 +43,7 @@ class RewritePom {
         new PropertyRewriteRule(scalaBinaryVersionProperty, newBinaryVersion),
         new PropertyRewriteRule(scalaVersionProperty, newVersion)
     );
-    final FileRewriter rewriter = new FileRewriter(rewriteRules);
+    final FileRewriter rewriter = new FileRewriter(rewriteRules, generatePomBackupFiles);
     rewriter.rewrite(pom.getFile());
   }
 

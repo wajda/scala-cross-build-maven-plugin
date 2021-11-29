@@ -32,8 +32,9 @@ class ChangeVersionMojoHelper {
       final String scalaVersionProperty,
       final String scalaBinaryVersion,
       final String scalaVersion,
+      final Boolean generatePomBackupFiles,
       final Log log) throws MojoExecutionException {
-    final RewritePom rewritePom = new RewritePom();
+    final RewritePom rewritePom = new RewritePom(generatePomBackupFiles);
     for (final MavenProject subproject: projects) {
       log.debug("Rewriting " + subproject.getFile());
       try {
@@ -44,14 +45,14 @@ class ChangeVersionMojoHelper {
             scalaBinaryVersion,
             scalaVersion);
       } catch (final IOException | XMLStreamException ex) {
-        restoreProjects(projects);
+        restoreProjects(projects, generatePomBackupFiles);
         throw new MojoExecutionException("Failed to rewrite POM", ex);
       }
     }
   }
 
-  public static void restoreProjects(final List<MavenProject> projects) throws MojoExecutionException {
-    final RewritePom rewritePom = new RewritePom();
+  public static void restoreProjects(final List<MavenProject> projects, final Boolean generatePomBackupFiles) throws MojoExecutionException {
+    final RewritePom rewritePom = new RewritePom(generatePomBackupFiles);
     for (final MavenProject project: projects) {
       try {
         rewritePom.restorePom(project);

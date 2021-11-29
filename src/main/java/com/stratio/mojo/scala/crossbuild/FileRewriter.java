@@ -33,17 +33,21 @@ class FileRewriter {
 
   private static final String BKP_SUFFIX = ".bkp";
 
-  private List<RewriteRule> rules;
+  private final List<RewriteRule> rules;
+  private final Boolean generatePomBackupFiles;
 
-  public FileRewriter(final List<RewriteRule> rules) {
+  public FileRewriter(final List<RewriteRule> rules, final Boolean generatePomBackupFiles) {
     this.rules = rules;
+    this.generatePomBackupFiles = generatePomBackupFiles;
   }
 
   public void rewrite(final File file) throws IOException {
     if (!file.exists()) {
       throw new FileNotFoundException("File does not exist: " + file);
     }
-    backupFile(file);
+    if (generatePomBackupFiles) {
+      backupFile(file);
+    }
     String result = IOUtils.toString(new FileInputStream(file), StandardCharsets.UTF_8);
     for (final RewriteRule rule: rules) {
       result = rule.replace(result);

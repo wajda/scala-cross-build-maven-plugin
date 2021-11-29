@@ -97,6 +97,7 @@
         <configuration>
           <defaultScalaBinaryVersion>${default.scala.binary.version}</defaultScalaBinaryVersion>
           <defaultScalaVersion>${default.scala.version}</defaultScalaVersion>
+          <generatePomBackupFiles>false</generatePomBackupFiles>
         </configuration>
       </plugin>
 

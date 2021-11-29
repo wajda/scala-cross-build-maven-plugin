@@ -56,7 +56,7 @@ public class RewriteJUnitXMLTest {
 
   @Test
   public void rewriteNonExistentFile() throws IOException {
-    final RewriteJUnitXML rewriter = new RewriteJUnitXML();
+    final RewriteJUnitXML rewriter = new RewriteJUnitXML(false);
     final String path = "report_does_not_exist.xml";
     final String newBinaryVersion = "2.11";
     thrown.expect(FileNotFoundException.class);
@@ -68,7 +68,7 @@ public class RewriteJUnitXMLTest {
     for (final String[] reportPair: reports) {
       final String origReport = reportPair[0];
       final String resultReport = reportPair[1];
-      final RewriteJUnitXML rewriter = new RewriteJUnitXML();
+      final RewriteJUnitXML rewriter = new RewriteJUnitXML(false);
       tempDir.create();
       final File file = tempDir.newFile();
       file.delete();
@@ -84,7 +84,7 @@ public class RewriteJUnitXMLTest {
   public void idempotency() throws IOException {
     for (final String[] reportPair: reports) {
       final String resultReport = reportPair[1];
-      final RewriteJUnitXML rewriter = new RewriteJUnitXML();
+      final RewriteJUnitXML rewriter = new RewriteJUnitXML(false);
       tempDir.create();
       final File file = tempDir.newFile();
       file.delete();
