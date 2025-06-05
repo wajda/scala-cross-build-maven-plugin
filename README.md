@@ -1,4 +1,4 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.wajda/scala-cross-build-maven-plugin/badge.svg)](https://search.maven.org/search?q=g:com.github.wajda)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.wajda/scala-cross-build-maven-plugin/badge.svg)](https://search.maven.org/search?q=g:io.github.wajda)
 
 scala-cross-build-maven-plugin
 ==============================

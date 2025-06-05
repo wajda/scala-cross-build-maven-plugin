@@ -78,7 +78,7 @@
       </plugin>
 
       <plugin>
-        <groupId>com.github.wajda</groupId>
+        <groupId>io.github.wajda</groupId>
         <artifactId>scala-cross-build-maven-plugin</artifactId>
         <version>@test.version@</version>
         <configuration>
