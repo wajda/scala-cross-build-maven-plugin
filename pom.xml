@@ -247,6 +247,7 @@
                         <configuration>
                             <publishingServerId>central</publishingServerId>
                             <autoPublish>true</autoPublish>
+                            <deploymentName>${project.version}</deploymentName>
                         </configuration>
                     </plugin>
                 </plugins>
