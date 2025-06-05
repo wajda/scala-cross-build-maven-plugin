@@ -4,7 +4,7 @@
     <groupId>io.github.wajda</groupId>
     <artifactId>scala-cross-build-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>0.2.3</version>
+    <version>0.2.4-SNAPSHOT</version>
 
     <name>Stratio scala-cross-build-maven-plugin Maven Mojo</name>
     <description>Maven Plugin to maintain Scala Cross Version Builds.</description>
@@ -14,7 +14,7 @@
         <url>https://github.com/wajda/scala-cross-build-maven-plugin</url>
         <connection>scm:git:git@github.com:wajda/scala-cross-build-maven-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:wajda/scala-cross-build-maven-plugin.git</developerConnection>
-        <tag>0.2.3</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
